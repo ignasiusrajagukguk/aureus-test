@@ -2,15 +2,19 @@
 
 A new Flutter project.
 
-## Getting Started
+- This app is made using 'BloC State Management'
 
-This project is a starting point for a Flutter application.
+The Features that provided are :
 
-A few resources to get you started if this is your first Flutter project:
+- Login, Register via Firebase,
+- Job List Screen
+- Near Me
+- Applied Job
+- Profile
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Screenshots :
+![Screenshot_1705414750](https://github.com/ignasiusrajagukguk/aureus-test/assets/116331051/42a78727-68a5-4b5a-bd00-2fb1e527a4c6)
+![Screenshot_1705414755](https://github.com/ignasiusrajagukguk/aureus-test/assets/116331051/149acedc-9744-48e6-b387-73783eae84fd)
+![Screenshot_1705414119](https://github.com/ignasiusrajagukguk/aureus-test/assets/116331051/ade903ed-3ba3-461e-b5a0-da8d044158f1)
+![Screenshot_1705414916](https://github.com/ignasiusrajagukguk/aureus-test/assets/116331051/d1927866-7b82-4c71-b55a-06f49db9d2f3)
+![Screenshot_1705415129](https://github.com/ignasiusrajagukguk/aureus-test/assets/116331051/6ce03db6-ecb6-43e9-a5f4-544c5a6e0617)
