@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "942423945954",
+    "firebase_url": "https://job-portal-36fdd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "job-portal-36fdd",
+    "storage_bucket": "job-portal-36fdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942423945954:android:88379d658827852b5a24bb",
+        "android_client_info": {
+          "package_name": "com.example.aureus_group"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPfu9cpEhoMAnQ5a6o2sP4yhqIuNLDgxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
