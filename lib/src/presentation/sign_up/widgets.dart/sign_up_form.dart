@@ -125,7 +125,7 @@ class SignUpForm extends StatelessWidget {
                         email: emailController.text,
                         password: passwordController.text));
                   } else {
-                    warningDialog(context);
+                    // warningDialog(context);
                   }
                   if (state.loginSuccessful) {
                     Navigator.pushNamed(
@@ -133,7 +133,7 @@ class SignUpForm extends StatelessWidget {
                       Routes.dashboard,
                     );
                   }
-                }, textColor: ConstColors.white),
+                }, textColor: const Color.fromARGB(255, 102, 102, 102)),
                 SeparatorWidget.height20(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
