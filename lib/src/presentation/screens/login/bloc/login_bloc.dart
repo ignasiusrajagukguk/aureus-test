@@ -3,6 +3,7 @@ import 'package:aureus_group/src/common/constants/regular_expresions.dart';
 import 'package:aureus_group/src/common/enum/request_state.dart';
 import 'package:aureus_group/src/common/enum/validation.dart';
 import 'package:aureus_group/src/common/helper/common_util.dart';
+import 'package:aureus_group/src/data/models/login_response.dart';
 import 'package:aureus_group/src/repositories/authentication.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -28,9 +29,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _loginWithEmailPassword(LoginWithEmailPassword event, emit) async {
     try {
       emit(state.copyWith(requestState: RequestState.loading));
-      bool loginsuccessful = await AuthRepository().signIn(email: event.email??'', password: event.password??'');
+     LoginResponseModel data =  await AuthRepository().signIn(email: event.email??'', password: event.password??'');
       emit(state.copyWith(
-        loginSuccessful: loginsuccessful,
+        loginSuccessful: data.registered,
           requestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(requestState: RequestState.error));
@@ -40,9 +41,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _signUpWithEmailPassword(SignUpWithEmailPassword event, emit) async {
     try {
       emit(state.copyWith(requestState: RequestState.loading));
-      bool loginsuccessful = await AuthRepository().signIn(email: event.email??'', password: event.password??'');
+   LoginResponseModel data =    await AuthRepository().signIn(email: event.email??'', password: event.password??'');
       emit(state.copyWith(
-        loginSuccessful: loginsuccessful,
+        loginSuccessful: data.registered,
           requestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(requestState: RequestState.error));
