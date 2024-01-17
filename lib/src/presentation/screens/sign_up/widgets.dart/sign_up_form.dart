@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:aureus_group/src/common/constants/collors.dart';
 import 'package:aureus_group/src/common/constants/routes.dart';
 import 'package:aureus_group/src/common/constants/text_style.dart';
@@ -15,7 +13,6 @@ import 'package:aureus_group/src/presentation/widgets/typography/typography.dart
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpForm extends StatelessWidget {

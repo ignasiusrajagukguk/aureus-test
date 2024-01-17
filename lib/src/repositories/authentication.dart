@@ -5,8 +5,6 @@ import 'package:aureus_group/src/data/models/login_response.dart';
 import 'package:aureus_group/src/data/models/sign_up_response.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRepository {
