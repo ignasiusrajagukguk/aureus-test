@@ -18,3 +18,6 @@ class DashboardSetTabIndex extends DashboardEvent {
 
 class GetJobList extends DashboardEvent {
 }
+
+class GetProfileData extends DashboardEvent {
+}

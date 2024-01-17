@@ -16,10 +16,12 @@ class LoginForm extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final Function() sendEmail;
+  final Function() navigateToSignUp;
   const LoginForm({
     required this.emailController,
     required this.passwordController,
     required this.sendEmail,
+    required this.navigateToSignUp,
     Key? key,
   }) : super(key: key);
 
@@ -118,12 +120,7 @@ class LoginForm extends StatelessWidget {
                     const BodyText.dflt("Don't have an account?"),
                     SeparatorWidget.width8(),
                     InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            Routes.signUp,
-                          );
-                        },
+                        onTap: navigateToSignUp,
                         child: const BodyText.dfltBold(
                           'Sign Up',
                           color: ConstColors.orange,

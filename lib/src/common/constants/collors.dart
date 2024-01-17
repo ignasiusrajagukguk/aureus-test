@@ -12,4 +12,6 @@ class ConstColors {
   static const gray40 = Color(0xFF757575);
   static const orange = Color(0xFFEA9E5B);
   static const blue30 = Color(0xFF2D7FF9);
+  static const green30 = Color(0xFF04CF00);
+  static const red50 = Color(0xFF9A1919);
 }

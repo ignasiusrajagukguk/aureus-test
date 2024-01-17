@@ -1,11 +1,13 @@
 import 'package:aureus_group/src/common/constants/routes.dart';
 import 'package:aureus_group/src/common/router/jobbox_router.dart';
 import 'package:aureus_group/src/presentation/effects/scrolls.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
