@@ -20,6 +20,11 @@ dependencies:
   http: ^0.13.4
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
+  firebase_storage: ^11.2.4
+  camera: ^0.10.5+1
+  image_picker: ^0.8.4+2
+  permission_handler: ^10.4.0
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

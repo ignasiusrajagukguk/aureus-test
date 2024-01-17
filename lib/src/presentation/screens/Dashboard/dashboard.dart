@@ -50,6 +50,7 @@ class __DashboardScreenState extends State<_DashboardScreen>
 
   _fetchData() {
     context.read<DashboardBloc>().add(GetJobList());
+    context.read<DashboardBloc>().add(GetProfileData());
   }
 
   @override

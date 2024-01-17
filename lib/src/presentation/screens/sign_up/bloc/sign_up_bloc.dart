@@ -3,60 +3,68 @@ import 'package:aureus_group/src/common/constants/regular_expresions.dart';
 import 'package:aureus_group/src/common/enum/request_state.dart';
 import 'package:aureus_group/src/common/enum/validation.dart';
 import 'package:aureus_group/src/common/helper/common_util.dart';
-import 'package:aureus_group/src/data/models/login_response.dart';
+import 'package:aureus_group/src/data/models/sign_up_response.dart';
 import 'package:aureus_group/src/repositories/authentication.dart';
 import 'package:bloc/bloc.dart';
+import 'package:camera/camera.dart';
 import 'package:equatable/equatable.dart';
 
-part 'login_event.dart';
-part 'login_state.dart';
+part 'sign_up_event.dart';
+part 'sign_up_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginState.initial()) {
+class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
+  SignUpBloc() : super(SignUpState.initial()) {
     // on<LoginWithEmail>(_loginEmail);
-    on<LoginSetPasswordVisibility>(_loginSetPasswordVisibility);
-    on<LoginValidateEmail>(_loginValidateEmail);
-    on<LoginValidatePassword>(_loginValidatePassword);
-    on<LoginWithEmailPassword>(_loginWithEmailPassword);
+    on<SignUpSetPasswordVisibility>(_loginSetPasswordVisibility);
+    on<SignUpValidateEmail>(_loginValidateEmail);
+    on<SignUpValidatePassword>(_loginValidatePassword);
     on<SignUpWithEmailPassword>(_signUpWithEmailPassword);
+    on<SignUpUpdateImage>(_signUpUpdateImageFile);
+    on<SignUpUploadImage>(_uploadFile);
   }
 
   bool get isEmailAndPasswordValid =>
       state.emailValidation == Validation.valid &&
       state.passwordValidation == Validation.valid;
 
-  void _loginWithEmailPassword(LoginWithEmailPassword event, emit) async {
+  void _signUpWithEmailPassword(SignUpWithEmailPassword event, emit) async {
     try {
       emit(state.copyWith(requestState: RequestState.loading));
-      LoginResponseModel data = await AuthRepository()
-          .signIn(email: event.email ?? '', password: event.password ?? '');
+      SignUpResponse data = await AuthRepository()
+          .signUp(email: event.email ?? '', password: event.password ?? '');
+      await AuthRepository().postUserData(
+          email: event.email ?? '',
+          imageLink: event.imageUrl!,
+          name: event.name!,
+          phone: event.phone!);
       emit(state.copyWith(
-          loginSuccessful: data.registered,
+          loginSuccessful: data.idToken != null,
           requestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(requestState: RequestState.error));
     }
   }
 
-  void _signUpWithEmailPassword(SignUpWithEmailPassword event, emit) async {
+  void _uploadFile(SignUpUploadImage event, emit) async {
     try {
       emit(state.copyWith(requestState: RequestState.loading));
-      LoginResponseModel data = await AuthRepository()
-          .signIn(email: event.email ?? '', password: event.password ?? '');
-      emit(state.copyWith(
-          loginSuccessful: data.registered,
-          requestState: RequestState.success));
+      String data = await AuthRepository().uploadImage(file: event.file!);
+      emit(state.copyWith(imageUrl: data, requestState: RequestState.success));
     } catch (e) {
       emit(state.copyWith(requestState: RequestState.error));
     }
   }
 
   void _loginSetPasswordVisibility(
-      LoginSetPasswordVisibility event, emit) async {
+      SignUpSetPasswordVisibility event, emit) async {
     emit(state.copyWith(isObscurePassword: event.isObscurePassword));
   }
 
-  void _loginValidateEmail(LoginValidateEmail event, emit) {
+  void _signUpUpdateImageFile(SignUpUpdateImage event, emit) async {
+    emit(state.copyWith(file: event.file));
+  }
+
+  void _loginValidateEmail(SignUpValidateEmail event, emit) {
     Validation emailValidation = state.emailValidation;
     if (CommonUtil.falsyChecker(event.email) ||
         (event.email != null &&
@@ -68,7 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(emailValidation: emailValidation));
   }
 
-  void _loginValidatePassword(LoginValidatePassword event, emit) {
+  void _loginValidatePassword(SignUpValidatePassword event, emit) {
     Validation passwordValidation = state.emailValidation;
     if (CommonUtil.falsyChecker(event.password)) {
       passwordValidation = Validation.invalid;

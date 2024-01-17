@@ -1,47 +1,49 @@
 import 'package:aureus_group/src/common/constants/collors.dart';
 import 'package:aureus_group/src/common/constants/text_style.dart';
-import 'package:aureus_group/src/presentation/screens/login/bloc/login_bloc.dart';
-import 'package:aureus_group/src/presentation/sign_up/widgets.dart/sign_up_form.dart';
+import 'package:aureus_group/src/presentation/screens/sign_up/bloc/sign_up_bloc.dart';
+import 'package:aureus_group/src/presentation/screens/sign_up/widgets.dart/sign_up_form.dart';
 import 'package:aureus_group/src/presentation/widgets/appbar_widget/appbar_widget.dart';
 import 'package:aureus_group/src/presentation/widgets/separator_widget.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+class SignUpArguments {
+  late List<CameraDescription> cameras;
+  late CameraDescription camera;
+
+  SignUpArguments({required this.camera, required this.cameras});
+}
+
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  final SignUpArguments arguments;
+  const SignUpScreen({Key? key, required this.arguments}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(),
-      child: const _SignUpScreen(),
+      create: (context) => SignUpBloc(),
+      child: _SignUpScreen(
+        arguments: arguments,
+      ),
     );
   }
 }
 
-class _SignUpScreen extends StatelessWidget {
-  const _SignUpScreen({Key? key}) : super(key: key);
+class _SignUpScreen extends StatefulWidget {
+  final SignUpArguments arguments;
+  const _SignUpScreen({required this.arguments});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginBloc(),
-      child: const _LoginScreen(),
-    );
-  }
+  State<_SignUpScreen> createState() => __SignUpScreenState();
 }
 
-class _LoginScreen extends StatefulWidget {
-  const _LoginScreen();
-
-  @override
-  State<_LoginScreen> createState() => __LoginScreenState();
-}
-
-class __LoginScreenState extends State<_LoginScreen> {
+class __SignUpScreenState extends State<_SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
 
   @override
   void dispose() {
@@ -54,7 +56,8 @@ class __LoginScreenState extends State<_LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidgets.customColorAppBarWithBackButton(context, '', ConstColors.basicBackground, ConstColors.dark80),
+      appBar: AppBarWidgets.customColorAppBarWithBackButton(
+          context, '', ConstColors.basicBackground, ConstColors.dark80),
       backgroundColor: ConstColors.basicBackground,
       body: ListView(
         children: [
@@ -63,6 +66,10 @@ class __LoginScreenState extends State<_LoginScreen> {
             passwordController: passwordController,
             password2Controller: password2Controller,
             sendEmail: () {},
+            camera: widget.arguments.camera,
+            cameras: widget.arguments.cameras,
+            nameController: nameController,
+            phoneNumberController: phoneNumberController,
           ),
           SeparatorWidget.height50(),
           SeparatorWidget.height30(),
